@@ -39,7 +39,9 @@
  Output: true
  Time Complexity: O(lgn)		// O(n) brute force
  Space Complexity: O(1)
- 2) Is Valid BST?
+ */
+
+/**2) Is Valid BST?
 
  Give the root of a binary tree, return true if it is also a BST, false if it is not.
 
@@ -64,6 +66,39 @@
  Output: false (0 < 1)
  Time Complexity: O(n)
  Space Complexity: O(1)
+ */
+// Definition for a binary tree node.
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+    TreeNode() {}
+    TreeNode(int val) { this.val = val; }
+    TreeNode(int val, TreeNode left, TreeNode right) {
+        this.val = val;
+        this.left = left;
+        this.right = right;
+    }
+}
+
+class Solution2 {
+    // Recursive approach with validity check in each node
+    public boolean isValidBST(TreeNode root) {
+        return validateBST(root, Long.MIN_VALUE, Long.MAX_VALUE);
+    }
+
+    private boolean validateBST(TreeNode node, long min, long max) {
+        if (node == null) return true; // An empty tree is a BST
+
+        // Check if the current node's value is within the valid range
+        if (node.val <= min || node.val >= max) return false;
+
+        // Recursively check left and right subtrees with updated ranges
+        return validateBST(node.left, min, node.val)
+                && validateBST(node.right, node.val, max);
+    }
+}
+/**
  3) Convert Sorted Array to BST
 
  Given nums (an array of sorted ints, in ascending order), return a height-balanced BST (the height of the left and right subtree of every node differs by at most 1).
@@ -138,4 +173,6 @@
  1
  */
 public class binary_search_trees {
+
+
 }
